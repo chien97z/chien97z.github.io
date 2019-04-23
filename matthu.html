@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/chien97z/onmyoji/qaList.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#inputQ {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+p{
+	margin-top: 10px;
+	width: 100%;
+	border: 1px solid #5d88cc;
+}
+</style>
+</head>
+<body>
+<input type="text" id="inputQ" onkeyup="qaSearch()" placeholder="Gõ từ bất kỳ trong câu hỏi.." title="trả lời mật thư thời khắc đối đầu">
+<content id="answersZone" title="mật thư thời khắc đối đầu">
+	<h4>Cầu trả lời mật thư thời khắc đối đầu sẽ được hiển thị dưới đây....</h4>
+</content>
+<script>
+	function qaSearch(){
+		filter = document.getElementById("inputQ").value.toLowerCase();
+		content = document.getElementById("answersZone");
+		while(content.hasChildNodes()){
+			content.removeChild(content.childNodes[0]);
+		}
+		for (var i = QAList.Q.length - 1; i >= 0; i--) {
+			if (QAList.Q[i].toLowerCase().indexOf(filter) > -1) {
+				var node = document.createElement("p");
+				var br = document.createElement("br");
+				var qNode = document.createTextNode(QAList.Q[i]);
+				var aNode = document.createTextNode(QAList.A[i]);
+				node.appendChild(qNode);
+				node.appendChild(br);
+				node.appendChild(aNode);
+				document.getElementById("answersZone").appendChild(node);
+			}
+		}
+	}
+
+	// for(var i = 0; i < QAList.Q.length; i++){
+	// 	var node = document.createElement("p");
+	// 	var br = document.createElement("br");
+	// 	var qNode = document.createTextNode(QAList.Q[i]);
+	// 	var aNode = document.createTextNode(QAList.A[i]);
+	// 	node.appendChild(qNode);
+	// 	node.appendChild(br);
+	// 	node.appendChild(aNode);
+	// 	document.getElementById("answersZone").appendChild(node);
+	// }
+	// function qaSearch(){
+	// 	var input, filter, table, p, td, i, txtValue;
+	// 	input = document.getElementById("inputQ");
+	// 	filter = input.value.toLowerCase();
+	// 	table = document.getElementById("answersZone");
+	// 	p = table.getElementsByTagName("p");
+	// 	for(i = 0; i < p.length; i++){
+	// 		pp = p[i];
+	// 		if(pp){
+	// 			txtValue = pp.textContent || pp.innerText;
+	// 			if(txtValue.toLowerCase().indexOf(filter) > -1){
+	// 				p[i].style.display = "";
+	// 			}else{
+	// 				p[i].style.display = "none";
+	// 			}
+	// 		}
+	// 	}
+	// }
+	
+</script>
+
+</body>
+</html>
